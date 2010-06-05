@@ -1,3 +1,5 @@
+var SERVICE_URL = "http://localhost";
+
 var DEFINED_STATS_QUEUE_MAX_LENGTH = 1;
 var statsQueue = new Array();
 function addEventToQueue(eventName, eventValue) {
@@ -21,5 +23,5 @@ function sendDataToServer() {
         queryString += "&ev" + i + "=" + queItem.ev;
         i++;
     }
-    $("<img>").attr("src", "http://localhost" + queryString);
+    $("<img>").attr("src", SERVICE_URL + queryString);
 }
