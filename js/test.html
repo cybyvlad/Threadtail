@@ -7,18 +7,7 @@
     <script type="text/javascript" src="jqueryAnalytics.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            //URL
-			addEventToQueue('load',encodeURI(window.location));
-			//user agent
-			addEventToQueue('ua',navigator.userAgent);
-			//app code name
-			addEventToQueue('acn',navigator.appCodeName);
-			//browser name
-			addEventToQueue('bn',navigator.appName);
-			//browser version
-			addEventToQueue('bv',navigator.appVersion);
-			//Platform
-			addEventToQueue('pfm',navigator.platform);
+            W();
 			
             $("a").click(function(){
                 addEventToQueue('click',this)
