@@ -7,17 +7,24 @@
     <script type="text/javascript" src="jqueryAnalytics.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            addEventToQueue('load',new Date());
+            addEventToQueue('load',encodeURI(window.location));
             $("a").click(function(){
                 addEventToQueue('click',this)
             });
+			$("#someTextBox").bind('blur',function(){
+				addEventToQueue("w_"+this.id,$(this).val());
+			})
+			
+			
             $(window).unload(function(){
-                addEventToQueue('unload',new Date());
+                addEventToQueue('unload',new Date().getTime());
             })
         })
     </script>
 </head>
 <body>
 <a id="a1" href="#">mama are mere</a>
+<input id="someTextBox" type="text"/>
+<input type="password"/>
 </body>
 </html>
