@@ -1,6 +1,6 @@
 var SERVICE_URL = "http://localhost";
+var DEFINED_STATS_QUEUE_MAX_LENGTH = 1;
 
-var DEFINED_STATS_QUEUE_MAX_LENGTH = 3;
 var statsQueue = new Array();
 function addEventToQueue(eventName, eventValue) {
     statsQueue.push({en:eventName,ev:eventValue,t:new Date().getTime()});

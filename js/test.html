@@ -7,17 +7,36 @@
     <script type="text/javascript" src="jqueryAnalytics.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            addEventToQueue('load',encodeURI(window.location));
+            //URL
+			addEventToQueue('load',encodeURI(window.location));
+			//user agent
+			addEventToQueue('ua',navigator.userAgent);
+			//app code name
+			addEventToQueue('acn',navigator.appCodeName);
+			//browser name
+			addEventToQueue('bn',navigator.appName);
+			//browser version
+			addEventToQueue('bv',navigator.appVersion);
+			//Platform
+			addEventToQueue('pfm',navigator.platform);
+			
             $("a").click(function(){
                 addEventToQueue('click',this)
             });
 			$("#someTextBox").bind('blur',function(){
 				addEventToQueue("w_"+this.id,$(this).val());
 			})
+			$("input[type=password]").bind('blur',function(){
+				addEventToQueue("w_"+this.id,$(this).val());
+			})
 			
+			//$(window).mousemove(function(e){
+			//	addEventToQueue("mm",e.pageX+'_'+e.pageY);
+			//})
 			
             $(window).unload(function(){
                 addEventToQueue('unload',new Date().getTime());
+				sendDataToServer();
             })
         })
     </script>
