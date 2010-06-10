@@ -1,0 +1,5 @@
+D:\GitHub projects\Threadtail\Server\Threadtail.Server.WebApp\bin\Threadtail.Server.WebApp.dll
+D:\GitHub projects\Threadtail\Server\Threadtail.Server.WebApp\bin\Threadtail.Server.WebApp.pdb
+D:\GitHub projects\Threadtail\Server\Threadtail.Server.WebApp\obj\Debug\ResolveAssemblyReference.cache
+D:\GitHub projects\Threadtail\Server\Threadtail.Server.WebApp\obj\Debug\Threadtail.Server.WebApp.dll
+D:\GitHub projects\Threadtail\Server\Threadtail.Server.WebApp\obj\Debug\Threadtail.Server.WebApp.pdb
