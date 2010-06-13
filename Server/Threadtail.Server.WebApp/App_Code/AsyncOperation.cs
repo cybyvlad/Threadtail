@@ -1,22 +1,35 @@
 ﻿#region Using directives
-
 using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Web;
+
+using Threadtail.Server.MessageBus;
 
 #endregion
 
 namespace Threadtail.Server.WebApp
 {
-    internal class AsynchOperation : IAsyncResult
+    internal class AsyncOperation : IAsyncResult
     {
+        #region Construction & Destruction
+        public AsyncOperation(AsyncCallback callback, HttpContext context, Object state)
+        {
+            _callback = callback;
+            _context = context;
+            _state = state;
+            _completed = false;
+        }
+        #endregion
+
+        #region Fields
         private bool _completed;
         private readonly Object _state;
         private readonly AsyncCallback _callback;
         private readonly HttpContext _context;
-        private const string SSID = "ssid";
+        private static readonly MessageBusSender _messageBusSender = new MessageBusSender();
+        #endregion
 
+        #region Properties
         bool IAsyncResult.IsCompleted
         {
             get { return _completed; }
@@ -36,15 +49,9 @@ namespace Threadtail.Server.WebApp
         {
             get { return false; }
         }
+        #endregion
 
-        public AsynchOperation(AsyncCallback callback, HttpContext context, Object state)
-        {
-            _callback = callback;
-            _context = context;
-            _state = state;
-            _completed = false;
-        }
-
+        #region Methods
         public void StartAsyncWork()
         {
             ThreadPool.QueueUserWorkItem(StartAsyncTask, null);
@@ -52,24 +59,13 @@ namespace Threadtail.Server.WebApp
 
         private void StartAsyncTask(Object workItemState)
         {
-            Debug.WriteLine("========================================");
+            var httpRequest = _context.Request;
 
-            var queryString = _context.Request.QueryString;
-            Debug.WriteLine("querystring =[" + queryString + "]");
-            Debug.WriteLine("Session ID = " + queryString[SSID]);
-
-            for (var i = 1; i < queryString.AllKeys.Length; i++)
-            {
-                var eventName = queryString.AllKeys[i];
-                var eventValue = queryString[eventName];
-
-                Debug.WriteLine(eventName + " -> " + eventValue);
-            }
-
-            Debug.WriteLine("========================================");
+            MessageBusSender.SendMessage(httpRequest.RawUrl);
 
             _completed = true;
             _callback(this);
         }
+        #endregion
     }
 }

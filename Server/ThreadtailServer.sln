@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threadtail.Server.WebApp", "Threadtail.Server.WebApp\Threadtail.Server.WebApp.csproj", "{20CA2326-7948-469B-9990-D94AE80FEE32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threadtail.Server.MessageBus", "Threadtail.Server.MessageBus\Threadtail.Server.MessageBus.csproj", "{515643D8-B779-4DE0-B0D6-651AA7F7C4B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threadtail.Server.RabbitMqUtils", "Threadtail.Server.RabbitMqUtils\Threadtail.Server.RabbitMqUtils.csproj", "{CFE7BEF3-C8F7-42B2-B020-65C48351CDB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{20CA2326-7948-469B-9990-D94AE80FEE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20CA2326-7948-469B-9990-D94AE80FEE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20CA2326-7948-469B-9990-D94AE80FEE32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{515643D8-B779-4DE0-B0D6-651AA7F7C4B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515643D8-B779-4DE0-B0D6-651AA7F7C4B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515643D8-B779-4DE0-B0D6-651AA7F7C4B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515643D8-B779-4DE0-B0D6-651AA7F7C4B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFE7BEF3-C8F7-42B2-B020-65C48351CDB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFE7BEF3-C8F7-42B2-B020-65C48351CDB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFE7BEF3-C8F7-42B2-B020-65C48351CDB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFE7BEF3-C8F7-42B2-B020-65C48351CDB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
