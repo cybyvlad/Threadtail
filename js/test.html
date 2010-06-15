@@ -8,7 +8,6 @@
     <script type="text/javascript">
         $(document).ready(function(){
             W();
-			
             $("a").click(function(){
                 addEventToQueue('click',this)
             });
@@ -18,11 +17,9 @@
 			$("input[type=password]").bind('blur',function(){
 				addEventToQueue("w_"+this.id,$(this).val());
 			})
-			
-			//$(window).mousemove(function(e){
-			//	addEventToQueue("mm",e.pageX+'_'+e.pageY);
-			//})
-			
+			$(window).mousemove(function(e){
+				addEventToQueue("mm",e.pageX+'_'+e.pageY);
+			})
             $(window).unload(function(){
                 addEventToQueue('unload',new Date().getTime());
 				sendDataToServer();
