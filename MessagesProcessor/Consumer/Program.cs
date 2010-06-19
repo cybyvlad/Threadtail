@@ -15,6 +15,8 @@ namespace Consumer
         private static void Main(string[] args)
         {
             var notificationConsumer = new NotificationConsumer();
+
+
             Console.WriteLine("Finished");
             notificationConsumer.Dispose();
         }

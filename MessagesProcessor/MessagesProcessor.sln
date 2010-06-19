@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessorCUI", "ProcessorCUI\ProcessorCUI.csproj", "{B48666F5-5A16-49C5-8CD3-8DDAA3E09757}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{EBD2BB6A-8B60-4743-8FFF-421229DBC296}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,10 @@ Global
 		{B48666F5-5A16-49C5-8CD3-8DDAA3E09757}.Debug|x86.Build.0 = Debug|x86
 		{B48666F5-5A16-49C5-8CD3-8DDAA3E09757}.Release|x86.ActiveCfg = Release|x86
 		{B48666F5-5A16-49C5-8CD3-8DDAA3E09757}.Release|x86.Build.0 = Release|x86
+		{EBD2BB6A-8B60-4743-8FFF-421229DBC296}.Debug|x86.ActiveCfg = Debug|x86
+		{EBD2BB6A-8B60-4743-8FFF-421229DBC296}.Debug|x86.Build.0 = Debug|x86
+		{EBD2BB6A-8B60-4743-8FFF-421229DBC296}.Release|x86.ActiveCfg = Release|x86
+		{EBD2BB6A-8B60-4743-8FFF-421229DBC296}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

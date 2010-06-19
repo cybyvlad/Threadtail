@@ -1,11 +1,11 @@
 ﻿#region Using directives
-using System;
 
+using System;
 using RabbitMQ.Client;
 
 #endregion
 
-namespace Threadtail.Server.RabbitMqUtils
+namespace Common
 {
     public class ChannelWrapper : IDisposable
     {
@@ -33,6 +33,7 @@ namespace Threadtail.Server.RabbitMqUtils
         {
             Dispose(false);
         }
+
 
         // Track whether Dispose has been called.
         private bool _disposed;
@@ -78,6 +79,7 @@ namespace Threadtail.Server.RabbitMqUtils
                 _disposed = true;
             }
         }
+
 
         // Implement IDisposable.
         // Do not make this method virtual.

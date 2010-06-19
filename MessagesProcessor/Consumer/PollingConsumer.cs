@@ -1,54 +1,36 @@
 ﻿#region Using directives
-using System;
 
+using System;
+using System.Text;
+using System.Threading;
+using Common;
 using RabbitMQ.Client;
 
 #endregion
 
-namespace Threadtail.Server.RabbitMqUtils
+namespace Consumer
 {
-    public class ChannelWrapper : IDisposable
+    public class PollingConsumer : IDisposable
     {
-        public ChannelWrapper()
+        public PollingConsumer()
         {
-            var factory = new ConnectionFactory();
-            var protocol = Protocols.FromEnvironment();
-            _connection = factory.CreateConnection(protocol, "localhost", 5672);
-            _channel = _connection.CreateModel();
-
-            // Declare Exchange
-            _channel.ExchangeDeclare(Settings.ExchangeName, ExchangeType.Direct);
-
-            // Declare Queue
-            _channel.QueueDeclare(Settings.QueueName);
-
-            // Bind the Exchange to the Queue
-            _channel.QueueBind(Settings.QueueName, Settings.ExchangeName, Settings.RoutingKey, false, null);
+            _channelWrapper = ChannelFactory.CreateChannel();
+            _thread = new Thread(Start);
+            _thread.Start(_channelWrapper.Channel);
         }
 
         // Use C# destructor syntax for finalization code.
         // This destructor will run only if the Dispose method
         // does not get called.
-        ~ChannelWrapper()
+        ~PollingConsumer()
         {
             Dispose(false);
         }
 
+        private readonly Thread _thread;
         // Track whether Dispose has been called.
         private bool _disposed;
-
-        private readonly IModel _channel;
-        private readonly IConnection _connection;
-
-        public IModel Channel
-        {
-            get { return _channel; }
-        }
-
-        public IConnection Connection
-        {
-            get { return _connection; }
-        }
+        private readonly ChannelWrapper _channelWrapper;
 
         // Dispose(bool disposing) executes in two distinct scenarios.
         // If disposing equals true, the method has been called directly
@@ -64,13 +46,14 @@ namespace Threadtail.Server.RabbitMqUtils
             {
                 if (disposing)
                 {
-                    if (_channel != null)
+                    if (_thread != null)
                     {
-                        _channel.Close();
+                        _thread.Abort();
                     }
-                    if (_connection != null)
+
+                    if (_channelWrapper != null)
                     {
-                        _connection.Close();
+                        _channelWrapper.Dispose();
                     }
                 }
 
@@ -78,6 +61,7 @@ namespace Threadtail.Server.RabbitMqUtils
                 _disposed = true;
             }
         }
+
 
         // Implement IDisposable.
         // Do not make this method virtual.
@@ -91,6 +75,33 @@ namespace Threadtail.Server.RabbitMqUtils
             // and prevent finalization code for this object
             // from executing a second time.
             GC.SuppressFinalize(this);
+        }
+
+        private static void Start(object state)
+        {
+            var channel = (IModel) state;
+
+            while (true)
+            {
+                const bool noAck = false;
+                var result = channel.BasicGet(Settings.QueueName, noAck);
+                if (result == null)
+                {
+                    Console.WriteLine("No message available at this time");
+                    Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
+                }
+                else
+                {
+                    // acknowledge receipt of the message
+                    channel.BasicAck(result.DeliveryTag, false);
+
+//                    var props = result.BasicProperties;
+                    var body = result.Body;
+//                    Console.WriteLine(props);
+                    var message = Encoding.UTF8.GetString(body);
+                    Console.WriteLine("Message received. Message has the length = " + message.Length);
+                }
+            }
         }
     }
 }
