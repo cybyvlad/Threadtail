@@ -13,7 +13,8 @@ namespace Threadtail.Server.RabbitMqUtils
         {
             var factory = new ConnectionFactory();
             var protocol = Protocols.FromEnvironment();
-            _connection = factory.CreateConnection(protocol, "localhost", 5672);
+//            _connection = factory.CreateConnection(protocol, "localhost", 5672);
+            _connection = factory.CreateConnection(protocol, ThreadtailConfiguration.Instance.RabbitMqHost, ThreadtailConfiguration.Instance.RabbitMqPort);
             _channel = _connection.CreateModel();
 
             // Declare Exchange
