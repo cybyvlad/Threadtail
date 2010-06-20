@@ -18,19 +18,19 @@ namespace Consumer
             qscoll.Remove("ssid");
             
             int numberOfEvents = qscoll.Count/3;
-            var list = new SortedList<DateTime, AnalyticsEvent>();
+            var list = new SortedSet<AnalyticsEvent>();
             for (int i = 0; i < numberOfEvents;i++ )
             {
                 var m = new AnalyticsEvent(qscoll["en" + i], qscoll["ev" + i], qscoll["t" + i]);
-                list.Add(m.TimeOfEvent,m);
+                list.Add(m);
             }
             Console.WriteLine("UserId="+userId);
             Console.WriteLine("Performed the following actions");
             foreach (var analyticsEvent in list)
             {
-                Console.WriteLine("Event:"+analyticsEvent.Value.Name);
-                Console.WriteLine("Value:"+analyticsEvent.Value.Value);
-                Console.WriteLine("Time:"+analyticsEvent.Value.TimeOfEvent);
+                Console.WriteLine("Event:"+analyticsEvent.Name);
+                Console.WriteLine("Value:"+analyticsEvent.Value);
+                Console.WriteLine("Time:"+analyticsEvent.TimeOfEvent);
             }
 
 
