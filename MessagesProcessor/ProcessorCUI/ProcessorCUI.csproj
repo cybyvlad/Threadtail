@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnalyticsEvent.cs" />
+    <Compile Include="EEventType.cs" />
     <Compile Include="MessageProcessor.cs" />
     <Compile Include="NotificationConsumer.cs" />
     <Compile Include="PollingConsumer.cs" />

@@ -22,7 +22,11 @@ namespace Consumer
             for (int i = 0; i < numberOfEvents;i++ )
             {
                 var m = new AnalyticsEvent(qscoll["en" + i], qscoll["ev" + i], qscoll["t" + i]);
-                list.Add(m);
+                if (m.EventType != EEventType.MouseMove)
+                {
+                    list.Add(m);    
+                }
+                
             }
             Console.WriteLine("UserId="+userId);
             Console.WriteLine("Performed the following actions");

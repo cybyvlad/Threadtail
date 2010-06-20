@@ -58,14 +58,14 @@ function createUUID() {
 
 var SERVICE_URL = "http://localhost:888/x.jpg";
 var COOKIE_NAME = "ThreadTailCookie"
-var DEFINED_STATS_QUEUE_MAX_LENGTH = 5;
-var SSID = createUUID();
+var DEFINED_STATS_QUEUE_MAX_LENGTH = 1;
+var SSID = getSSID();
 var statsQueue = new Array();
 function addEventToQueue(eventName, eventValue) {
     var d = new Date();
 	//getting the actual utc time. We can`t send localtime to the server because we would lose time-related data.
 	var utcTime = d.getTime();
-	statsQueue.push({en:eventName,ev:eventValue,t:utcTime});
+	statsQueue.push({en:eventName,ev:encodeURIComponent(eventValue),t:utcTime});
     if (statsQueue.length >= DEFINED_STATS_QUEUE_MAX_LENGTH)
     {
         sendDataToServer();
@@ -89,7 +89,7 @@ function getSSID(){
 	var existingCookie = $.cookie(COOKIE_NAME);
 	if (existingCookie == null)
 	{
-		existingCookie = guid();
+		existingCookie = createUUID();
 		var options = { path: '/', expires: 10 };
 		$.cookie(COOKIE_NAME,existingCookie,options);
 	}
