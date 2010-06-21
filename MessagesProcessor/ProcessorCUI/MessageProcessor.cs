@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using ProcessorCUI;
+using ProcessorCUI.Data;
 
 namespace Consumer
 {
@@ -14,7 +15,7 @@ namespace Consumer
             var qscoll = HttpUtility.ParseQueryString(querystring);
 
             //get the session ID first
-            var userId = qscoll["ssid"];
+            var sessionId = qscoll["ssid"];
             qscoll.Remove("ssid");
             
             int numberOfEvents = qscoll.Count/3;
@@ -26,9 +27,8 @@ namespace Consumer
                 {
                     list.Add(m);    
                 }
-                
             }
-            Console.WriteLine("UserId="+userId);
+            Console.WriteLine("UserId="+sessionId);
             Console.WriteLine("Performed the following actions");
             foreach (var analyticsEvent in list)
             {

@@ -85,7 +85,7 @@ namespace Consumer
 
                     // acknowledge receipt of the message
                     channel.BasicAck(e.DeliveryTag, false);
-
+                    
                     var body = e.Body;
                     var rawUrl = Encoding.UTF8.GetString(body);
 //                    Console.WriteLine(string.Format("Message [{0}] received.", message));

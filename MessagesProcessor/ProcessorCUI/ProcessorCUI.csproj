@@ -48,7 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnalyticsEvent.cs" />
+    <Compile Include="Data\AnalyticsEvent.cs" />
+    <Compile Include="Data\BrowserData.cs" />
+    <Compile Include="Data\PageEvents.cs" />
+    <Compile Include="Data\VisitData.cs" />
     <Compile Include="EEventType.cs" />
     <Compile Include="MessageProcessor.cs" />
     <Compile Include="NotificationConsumer.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecialEvents.cs" />
+    <Compile Include="Data\Visitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
