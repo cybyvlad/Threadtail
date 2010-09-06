@@ -4,7 +4,7 @@ using System.Web;
 
 #endregion
 
-namespace Threadtail.Server.WebApp
+namespace Threadtail.Server.WebApp.App_Code
 {
     public class HttpHandler : IHttpAsyncHandler
     {

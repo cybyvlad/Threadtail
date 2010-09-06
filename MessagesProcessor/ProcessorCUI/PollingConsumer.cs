@@ -1,10 +1,11 @@
 ﻿#region Using directives
-
 using System;
 using System.Text;
 using System.Threading;
-using Common;
+
 using RabbitMQ.Client;
+
+using Threadtail.RabbitMqUtils;
 
 #endregion
 
@@ -30,7 +31,7 @@ namespace Consumer
         private readonly Thread _thread;
         // Track whether Dispose has been called.
         private bool _disposed;
-        private readonly ChannelWrapper _channelWrapper;
+        private readonly IChannelWrapper _channelWrapper;
 
         // Dispose(bool disposing) executes in two distinct scenarios.
         // If disposing equals true, the method has been called directly
@@ -61,7 +62,6 @@ namespace Consumer
                 _disposed = true;
             }
         }
-
 
         // Implement IDisposable.
         // Do not make this method virtual.

@@ -7,7 +7,7 @@ using Threadtail.Server.MessageBus;
 
 #endregion
 
-namespace Threadtail.Server.WebApp
+namespace Threadtail.Server.WebApp.App_Code
 {
     internal class AsyncOperation : IAsyncResult
     {
@@ -26,7 +26,6 @@ namespace Threadtail.Server.WebApp
         private readonly Object _state;
         private readonly AsyncCallback _callback;
         private readonly HttpContext _context;
-        private static readonly MessageBusSender _messageBusSender = new MessageBusSender();
         #endregion
 
         #region Properties
@@ -52,20 +51,29 @@ namespace Threadtail.Server.WebApp
         #endregion
 
         #region Methods
+
+        #region StartAsyncWork
         public void StartAsyncWork()
         {
             ThreadPool.QueueUserWorkItem(StartAsyncTask, null);
         }
+        #endregion
 
+        #region StartAsyncTask
         private void StartAsyncTask(Object workItemState)
         {
             var httpRequest = _context.Request;
 
             MessageBusSender.SendMessage(httpRequest.RawUrl);
 
+            // Send also additional information extracted from Request.
+            var generateRawUrl = RawUrlGenerator.GenerateRawUrl(httpRequest);
+
             _completed = true;
             _callback(this);
         }
+        #endregion
+
         #endregion
     }
 }

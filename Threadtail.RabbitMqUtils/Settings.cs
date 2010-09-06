@@ -1,4 +1,4 @@
-namespace Common
+namespace Threadtail.RabbitMqUtils
 {
     public static class Settings
     {

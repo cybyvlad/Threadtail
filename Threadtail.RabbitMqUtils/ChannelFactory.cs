@@ -1,8 +1,8 @@
-namespace Threadtail.Server.RabbitMqUtils
+﻿namespace Threadtail.RabbitMqUtils
 {
     public static class ChannelFactory
     {
-        public static ChannelWrapper CreateChannel()
+        public static IChannelWrapper CreateChannel()
         {
             return new ChannelWrapper();
         }

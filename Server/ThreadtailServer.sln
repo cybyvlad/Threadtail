@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threadtail.Server.WebApp", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threadtail.Server.MessageBus", "Threadtail.Server.MessageBus\Threadtail.Server.MessageBus.csproj", "{515643D8-B779-4DE0-B0D6-651AA7F7C4B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threadtail.Server.RabbitMqUtils", "Threadtail.Server.RabbitMqUtils\Threadtail.Server.RabbitMqUtils.csproj", "{CFE7BEF3-C8F7-42B2-B020-65C48351CDB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threadtail.RabbitMqUtils", "..\Threadtail.RabbitMqUtils\Threadtail.RabbitMqUtils.csproj", "{CFE7BEF3-C8F7-42B2-B020-65C48351CDB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

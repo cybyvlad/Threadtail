@@ -62,13 +62,13 @@
     <Compile Include="Data\Visitor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{EBD2BB6A-8B60-4743-8FFF-421229DBC296}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <ProjectReference Include="..\..\Threadtail.RabbitMqUtils\Threadtail.RabbitMqUtils.csproj">
+      <Project>{CFE7BEF3-C8F7-42B2-B020-65C48351CDB6}</Project>
+      <Name>Threadtail.RabbitMqUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

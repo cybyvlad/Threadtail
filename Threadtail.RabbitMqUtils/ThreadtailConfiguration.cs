@@ -5,7 +5,7 @@ using System.Configuration;
 
 #endregion
 
-namespace Threadtail.Server.RabbitMqUtils
+namespace Threadtail.RabbitMqUtils
 {
     public class ThreadtailConfiguration
     {

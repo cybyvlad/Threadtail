@@ -1,13 +1,12 @@
 ﻿#region Using directives
 using System;
 using System.Text;
-using System.Web;
-
-using Common;
 
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
+
+using Threadtail.RabbitMqUtils;
 
 #endregion
 
@@ -31,7 +30,7 @@ namespace Consumer
 
         // Track whether Dispose has been called.
         private bool _disposed;
-        private readonly ChannelWrapper _channelWrapper;
+        private readonly IChannelWrapper _channelWrapper;
 
         // Dispose(bool disposing) executes in two distinct scenarios.
         // If disposing equals true, the method has been called directly
@@ -85,7 +84,7 @@ namespace Consumer
 
                     // acknowledge receipt of the message
                     channel.BasicAck(e.DeliveryTag, false);
-                    
+
                     var body = e.Body;
                     var rawUrl = Encoding.UTF8.GetString(body);
 //                    Console.WriteLine(string.Format("Message [{0}] received.", message));

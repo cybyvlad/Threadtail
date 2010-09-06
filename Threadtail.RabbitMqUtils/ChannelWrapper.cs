@@ -1,19 +1,22 @@
 ﻿#region Using directives
-
 using System;
+
 using RabbitMQ.Client;
 
 #endregion
 
-namespace Common
+namespace Threadtail.RabbitMqUtils
 {
-    public class ChannelWrapper : IDisposable
+    public class ChannelWrapper : IChannelWrapper
     {
+        #region Construction & Destruction
         public ChannelWrapper()
         {
             var factory = new ConnectionFactory();
             var protocol = Protocols.FromEnvironment();
-            _connection = factory.CreateConnection(protocol, "localhost", 5672);
+
+            _connection = factory.CreateConnection(protocol, ThreadtailConfiguration.Instance.RabbitMqHost,
+                                                   ThreadtailConfiguration.Instance.RabbitMqPort);
             _channel = _connection.CreateModel();
 
             // Declare Exchange
@@ -33,14 +36,17 @@ namespace Common
         {
             Dispose(false);
         }
+        #endregion
 
-
+        #region Fields
         // Track whether Dispose has been called.
         private bool _disposed;
 
         private readonly IModel _channel;
         private readonly IConnection _connection;
+        #endregion
 
+        #region Properties
         public IModel Channel
         {
             get { return _channel; }
@@ -50,14 +56,21 @@ namespace Common
         {
             get { return _connection; }
         }
+        #endregion
 
-        // Dispose(bool disposing) executes in two distinct scenarios.
-        // If disposing equals true, the method has been called directly
-        // or indirectly by a user's code. Managed and unmanaged resources
-        // can be disposed.
-        // If disposing equals false, the method has been called by the
-        // runtime from inside the finalizer and you should not reference
-        // other objects. Only unmanaged resources can be disposed.
+        #region Methods
+
+        #region Dispose
+        /// <summary>
+        ///   Dispose(bool disposing) executes in two distinct scenarios.
+        ///   If disposing equals true, the method has been called directly
+        ///   or indirectly by a user's code. Managed and unmanaged resources
+        ///   can be disposed.
+        ///   If disposing equals false, the method has been called by the
+        ///   runtime from inside the finalizer and you should not reference
+        ///   other objects. Only unmanaged resources can be disposed.
+        /// </summary>
+        /// <param name = "disposing"></param>
         private void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
@@ -79,7 +92,7 @@ namespace Common
                 _disposed = true;
             }
         }
-
+        #endregion
 
         // Implement IDisposable.
         // Do not make this method virtual.
@@ -94,5 +107,6 @@ namespace Common
             // from executing a second time.
             GC.SuppressFinalize(this);
         }
+        #endregion
     }
 }
