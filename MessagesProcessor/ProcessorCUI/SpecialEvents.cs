@@ -1,4 +1,4 @@
-namespace Consumer
+namespace ProcessorCUI
 {
     public static class SpecialEvents
     {

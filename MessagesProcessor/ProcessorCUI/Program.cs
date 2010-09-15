@@ -3,12 +3,11 @@
 #endregion
 
 #region Using directives
-
 using System;
 
 #endregion
 
-namespace Consumer
+namespace ProcessorCUI
 {
     internal class Program
     {

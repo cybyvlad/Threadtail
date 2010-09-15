@@ -1,43 +1,43 @@
+#region Using directives
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Web;
-using ProcessorCUI;
+
 using ProcessorCUI.Data;
 
-namespace Consumer
+#endregion
+
+namespace ProcessorCUI
 {
     public class MessageProcessor
     {
-        public void ProcessMessage(string querystring)
+        public static void ProcessMessage(string querystring)
         {
             // Parse the query string variables into a NameValueCollection.
             var qscoll = HttpUtility.ParseQueryString(querystring);
 
-            //get the session ID first
             var sessionId = qscoll["ssid"];
             qscoll.Remove("ssid");
-            
-            int numberOfEvents = qscoll.Count/3;
+
             var list = new SortedSet<AnalyticsEvent>();
-            for (int i = 0; i < numberOfEvents;i++ )
+            for (var i = 0; i < qscoll.Count; i += 3)
             {
-                var m = new AnalyticsEvent(qscoll["en" + i], qscoll["ev" + i], qscoll["t" + i]);
+                var m = new AnalyticsEvent(qscoll[i], qscoll[i+1], qscoll[i+2]);
                 if (m.EventType != EEventType.MouseMove)
                 {
-                    list.Add(m);    
+                    list.Add(m);
                 }
             }
-            Console.WriteLine("UserId="+sessionId);
+
+            Console.WriteLine();
+            Console.WriteLine("UserId=" + sessionId);
             Console.WriteLine("Performed the following actions");
             foreach (var analyticsEvent in list)
             {
-                Console.WriteLine("Event:"+analyticsEvent.Name);
-                Console.WriteLine("Value:"+analyticsEvent.Value);
-                Console.WriteLine("Time:"+analyticsEvent.TimeOfEvent);
+                Console.WriteLine("Event:" + analyticsEvent.Name);
+                Console.WriteLine("Value:" + analyticsEvent.Value);
+                Console.WriteLine("Time:" + analyticsEvent.TimeOfEvent);
             }
-
-
         }
     }
 }

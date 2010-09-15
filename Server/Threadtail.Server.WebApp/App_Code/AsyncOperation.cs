@@ -64,10 +64,8 @@ namespace Threadtail.Server.WebApp.App_Code
         {
             var httpRequest = _context.Request;
 
-            MessageBusSender.SendMessage(httpRequest.RawUrl);
-
-            // Send also additional information extracted from Request.
-            var generateRawUrl = RawUrlGenerator.GenerateRawUrl(httpRequest);
+            var rawUrl = RawUrlGenerator.GenerateRawUrl(httpRequest);
+            MessageBusSender.SendMessage(rawUrl);
 
             _completed = true;
             _callback(this);

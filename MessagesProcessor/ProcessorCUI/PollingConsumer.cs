@@ -9,7 +9,7 @@ using Threadtail.RabbitMqUtils;
 
 #endregion
 
-namespace Consumer
+namespace ProcessorCUI
 {
     public class PollingConsumer : IDisposable
     {

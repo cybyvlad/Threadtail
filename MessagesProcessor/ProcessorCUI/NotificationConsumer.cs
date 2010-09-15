@@ -10,7 +10,7 @@ using Threadtail.RabbitMqUtils;
 
 #endregion
 
-namespace Consumer
+namespace ProcessorCUI
 {
     public class NotificationConsumer : IDisposable
     {
@@ -123,7 +123,7 @@ namespace Consumer
                 return;
             }
             var mp = new MessageProcessor();
-            mp.ProcessMessage(querystring);
+            MessageProcessor.ProcessMessage(querystring);
         }
     }
 }

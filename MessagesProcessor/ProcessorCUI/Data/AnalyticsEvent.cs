@@ -9,7 +9,7 @@ namespace ProcessorCUI.Data
         {
             Name = name;
             Value = HttpUtility.UrlDecode(value);
-            var ts =TimeSpan.FromMilliseconds(long.Parse(time));
+            var ts =TimeSpan.FromMilliseconds(double.Parse(time));
             TimeOfEvent= (new DateTime(1970,1,1,0,0,0,DateTimeKind.Utc).Add(ts));
             EventType = GetEventType(Name);
         }
