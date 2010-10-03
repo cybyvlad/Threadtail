@@ -5,7 +5,7 @@ using System.Web;
 
 #endregion
 
-namespace Threadtail.Server.WebApp.App_Code
+namespace Threadtail.ServerLibrary
 {
     internal static class RawUrlGenerator
     {

@@ -7,31 +7,25 @@ using Threadtail.Server.MessageBus;
 
 #endregion
 
-namespace Threadtail.Server.WebApp.App_Code
+namespace Threadtail.ServerLibrary
 {
     internal class AsyncOperation : IAsyncResult
     {
         #region Construction & Destruction
-        public AsyncOperation(AsyncCallback callback, HttpContext context, Object state)
+        public AsyncOperation(HttpContext context)
         {
-            _callback = callback;
             _context = context;
-            _state = state;
-            _completed = false;
         }
         #endregion
 
         #region Fields
-        private bool _completed;
-        private readonly Object _state;
-        private readonly AsyncCallback _callback;
         private readonly HttpContext _context;
         #endregion
 
         #region Properties
         bool IAsyncResult.IsCompleted
         {
-            get { return _completed; }
+            get { return true; }
         }
 
         WaitHandle IAsyncResult.AsyncWaitHandle
@@ -41,7 +35,7 @@ namespace Threadtail.Server.WebApp.App_Code
 
         Object IAsyncResult.AsyncState
         {
-            get { return _state; }
+            get { return null; }
         }
 
         bool IAsyncResult.CompletedSynchronously
@@ -52,12 +46,7 @@ namespace Threadtail.Server.WebApp.App_Code
 
         #region Methods
 
-        #region StartAsyncWork
-        public void StartAsyncWork()
-        {
-            ThreadPool.QueueUserWorkItem(StartAsyncTask, null);
-        }
-        #endregion
+        #region Privates
 
         #region StartAsyncTask
         private void StartAsyncTask(Object workItemState)
@@ -66,9 +55,16 @@ namespace Threadtail.Server.WebApp.App_Code
 
             var rawUrl = RawUrlGenerator.GenerateRawUrl(httpRequest);
             MessageBusSender.SendMessage(rawUrl);
+        }
+        #endregion
 
-            _completed = true;
-            _callback(this);
+        #endregion
+
+        #region StartAsyncWork
+        public void StartAsyncWork()
+        {
+//            ThreadPool.QueueUserWorkItem(StartAsyncTask, null);
+            StartAsyncTask(null);
         }
         #endregion
 

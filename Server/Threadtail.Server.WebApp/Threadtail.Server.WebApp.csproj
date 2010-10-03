@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Threadtail.Server.WebApp</RootNamespace>
     <AssemblyName>Threadtail.Server.WebApp</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -34,9 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\StructureMap\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Drawing" />
@@ -64,8 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\HttpHandler.cs" />
-    <Content Include="App_Code\AsyncOperation.cs" />
-    <Content Include="App_Code\RawUrlGenerator.cs" />
+    <Content Include="App_Code\Bootstrapper.cs" />
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -79,9 +83,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Threadtail.Server.MessageBus\Threadtail.Server.MessageBus.csproj">
-      <Project>{515643D8-B779-4DE0-B0D6-651AA7F7C4B0}</Project>
-      <Name>Threadtail.Server.MessageBus</Name>
+    <ProjectReference Include="..\Threadtail.ServerLibrary\Threadtail.ServerLibrary.csproj">
+      <Project>{9D2F7519-8916-47C2-97A3-75EF023FD458}</Project>
+      <Name>Threadtail.ServerLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{515643D8-B779-4DE0-B0D6-651AA7F7C4B0}</ProjectGuid>
+    <ProjectGuid>{9D2F7519-8916-47C2-97A3-75EF023FD458}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Threadtail.Server.MessageBus</RootNamespace>
-    <AssemblyName>Threadtail.Server.MessageBus</AssemblyName>
+    <RootNamespace>Threadtail.ServerLibrary</RootNamespace>
+    <AssemblyName>Threadtail.ServerLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,17 +34,33 @@
     <Reference Include="RabbitMQ.Client, Version=1.7.2.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\RabbitMQ\RabbitMQ.Client.dll</HintPath>
-      <Private>False</Private>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\lib\StructureMap\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextContainsNoUrlException.cs" />
+    <Compile Include="ContextNullException.cs" />
+    <Compile Include="HttpContextHandler.cs" />
+    <Compile Include="IHttpContextHandler.cs" />
+    <Compile Include="IJavaScriptTimeCalculator.cs" />
+    <Compile Include="IMessageBusSender.cs" />
+    <Compile Include="IThreadtailHttpContext.cs" />
+    <Compile Include="IUrlBuilder.cs" />
+    <Compile Include="JavaScriptTimeCalculator.cs" />
+    <Compile Include="MessageBusSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UrlBuilder.cs" />
+    <Compile Include="ThreadTailHttpContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Threadtail.RabbitMqUtils\Threadtail.RabbitMqUtils.csproj">

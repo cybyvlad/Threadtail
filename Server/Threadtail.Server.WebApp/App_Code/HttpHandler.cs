@@ -2,32 +2,35 @@
 using System;
 using System.Web;
 
+using Threadtail.ServerLibrary;
+
 #endregion
 
 namespace Threadtail.Server.WebApp.App_Code
 {
-    public class HttpHandler : IHttpAsyncHandler
+    public class HttpHandler : IHttpHandler
     {
+        /// <summary>
+        /// Gets a value indicating whether another request can use the <see cref="T:System.Web.IHttpHandler"/> instance.
+        /// </summary>
+        /// <returns>
+        /// true if the <see cref="T:System.Web.IHttpHandler"/> instance is reusable; otherwise, false.
+        /// </returns>
         public bool IsReusable
         {
-            get { return true; }
+            get { return false; }
         }
 
-        public IAsyncResult BeginProcessRequest(HttpContext context, AsyncCallback asyncCallback, Object extraData)
-        {
-            var asynch = new AsyncOperation(asyncCallback, context, extraData);
-            asynch.StartAsyncWork();
-
-            return asynch;
-        }
-
-        public void EndProcessRequest(IAsyncResult result)
-        {
-        }
-
+        /// <summary>
+        /// Enables processing of HTTP Web requests by a custom HttpHandler that implements the <see cref="T:System.Web.IHttpHandler"/> interface.
+        /// </summary>
+        /// <param name="context">An <see cref="T:System.Web.HttpContext"/> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests.</param>
         public void ProcessRequest(HttpContext context)
         {
-            throw new InvalidOperationException();
+            var threadTailHttpContext = new ThreadtailHttpContext(context);
+
+            var httpContextHandler = new HttpContextHandler(threadTailHttpContext, null, null);
+            httpContextHandler.Process();
         }
     }
 }

@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{515643D8-B779-4DE0-B0D6-651AA7F7C4B0}</ProjectGuid>
+    <ProjectGuid>{32CBE5DB-055A-4896-8CBA-CE73A3715D98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Threadtail.Server.MessageBus</RootNamespace>
-    <AssemblyName>Threadtail.Server.MessageBus</AssemblyName>
+    <RootNamespace>Threadtail.ServerLibrary.Test</RootNamespace>
+    <AssemblyName>Threadtail.ServerLibrary.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,25 +31,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RabbitMQ.Client, Version=1.7.2.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+    <Reference Include="Moq">
+      <HintPath>..\lib\Moq\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RabbitMQ\RabbitMQ.Client.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\lib\NUnit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\lib\StructureMap\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpContextHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThreadtailHttpContextTests.cs" />
+    <Compile Include="UrlBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Threadtail.RabbitMqUtils\Threadtail.RabbitMqUtils.csproj">
-      <Project>{CFE7BEF3-C8F7-42B2-B020-65C48351CDB6}</Project>
-      <Name>Threadtail.RabbitMqUtils</Name>
+    <ProjectReference Include="..\Threadtail.ServerLibrary\Threadtail.ServerLibrary.csproj">
+      <Project>{9D2F7519-8916-47C2-97A3-75EF023FD458}</Project>
+      <Name>Threadtail.ServerLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
