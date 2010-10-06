@@ -4,6 +4,6 @@ namespace Threadtail.ServerLibrary
 {
     public interface IUrlBuilder
     {
-        string BuildUrl();
+        string BuildUrl(IThreadtailHttpContext context);
     }
 }

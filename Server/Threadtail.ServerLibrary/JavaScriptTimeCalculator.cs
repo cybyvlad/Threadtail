@@ -1,4 +1,6 @@
-﻿namespace Threadtail.ServerLibrary
+﻿using System;
+
+namespace Threadtail.ServerLibrary
 {
     public class JavaScriptTimeCalculator : IJavaScriptTimeCalculator
     {

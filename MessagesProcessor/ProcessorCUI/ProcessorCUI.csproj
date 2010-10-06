@@ -35,8 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RabbitMQ.Client">
-      <HintPath>..\lib\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="RabbitMQ.Client, Version=1.7.2.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RabbitMQ\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\lib\StructureMap\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Data\AnalyticsEvent.cs" />
     <Compile Include="Data\BrowserData.cs" />
     <Compile Include="Data\PageEvents.cs" />
@@ -68,6 +73,10 @@
     <ProjectReference Include="..\..\Threadtail.RabbitMqUtils\Threadtail.RabbitMqUtils.csproj">
       <Project>{CFE7BEF3-C8F7-42B2-B020-65C48351CDB6}</Project>
       <Name>Threadtail.RabbitMqUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MessageProcessor.Library\MessageProcessor.Library.csproj">
+      <Project>{318B7D72-1EBB-4EBB-A6AC-2411E33A68FF}</Project>
+      <Name>MessageProcessor.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

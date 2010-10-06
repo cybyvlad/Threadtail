@@ -1,7 +1,7 @@
 ﻿#region Using directives
 using System;
 using System.Text;
-
+using MessageProcessor.Library;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
@@ -14,10 +14,12 @@ namespace ProcessorCUI
 {
     public class NotificationConsumer : IDisposable
     {
-        public NotificationConsumer()
+        public NotificationConsumer(IMessageHandler messageHandler, IChannelWrapper channelWrapper)
         {
-            _channelWrapper = ChannelFactory.CreateChannel();
-            Start(_channelWrapper.Channel);
+            _messageHandler = messageHandler;
+            _channelWrapper = channelWrapper;
+
+            Listen();
         }
 
         // Use C# destructor syntax for finalization code.
@@ -30,6 +32,7 @@ namespace ProcessorCUI
 
         // Track whether Dispose has been called.
         private bool _disposed;
+        private readonly IMessageHandler _messageHandler;
         private readonly IChannelWrapper _channelWrapper;
 
         // Dispose(bool disposing) executes in two distinct scenarios.
@@ -71,8 +74,10 @@ namespace ProcessorCUI
             GC.SuppressFinalize(this);
         }
 
-        private static void Start(IModel channel)
+        private void Listen()
         {
+            var channel = _channelWrapper.Channel;
+
             var consumer = new QueueingBasicConsumer(channel);
             channel.BasicConsume(Settings.QueueName, null, consumer);
             while (true)
@@ -86,10 +91,11 @@ namespace ProcessorCUI
                     channel.BasicAck(e.DeliveryTag, false);
 
                     var body = e.Body;
-                    var rawUrl = Encoding.UTF8.GetString(body);
-//                    Console.WriteLine(string.Format("Message [{0}] received.", message));
+                    var message = Encoding.UTF8.GetString(body);
 
-                    ProcessMessage(rawUrl);
+                    _messageHandler.Process(message);
+                    
+                    // TODO: stop?
                 }
                 catch (OperationInterruptedException ex)
                 {
@@ -99,31 +105,6 @@ namespace ProcessorCUI
                     break;
                 }
             }
-        }
-
-        private static void ProcessMessage(string rawUrl)
-        {
-            String querystring = null;
-
-            // Check to make sure some query string variables exist.
-            var qPosition = rawUrl.IndexOf('?');
-            if (qPosition == -1)
-            {
-                Console.WriteLine("No query string variables!");
-                return;
-            }
-
-            if (qPosition < rawUrl.Length - 1)
-            {
-                querystring = rawUrl.Substring(qPosition + 1);
-            }
-            else
-            {
-                Console.WriteLine("No query string variables!");
-                return;
-            }
-            var mp = new MessageProcessor();
-            MessageProcessor.ProcessMessage(querystring);
         }
     }
 }

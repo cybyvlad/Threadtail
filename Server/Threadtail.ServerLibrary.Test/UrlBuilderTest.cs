@@ -28,7 +28,7 @@ namespace Threadtail.ServerLibrary.Test
 
             var urlBuilder = ObjectFactory.GetInstance<IUrlBuilder>();
 
-            var url = urlBuilder.BuildUrl();
+            var url = urlBuilder.BuildUrl(threadtailHttpContext);
 
             StringAssert.Contains("http://www.google.com", url);
         }
@@ -50,7 +50,7 @@ namespace Threadtail.ServerLibrary.Test
 
             var urlBuilder = ObjectFactory.GetInstance<IUrlBuilder>();
 
-            var url = urlBuilder.BuildUrl();
+            var url = urlBuilder.BuildUrl(threadtailHttpContext);
 
             StringAssert.Contains("http://www.google.com&enx1=Browser&evx1=BrowserName&tx1=1000", url);
         }
@@ -72,7 +72,7 @@ namespace Threadtail.ServerLibrary.Test
 
             var urlBuilder = ObjectFactory.GetInstance<IUrlBuilder>();
 
-            var url = urlBuilder.BuildUrl();
+            var url = urlBuilder.BuildUrl(threadtailHttpContext);
 
             StringAssert.Contains("http://www.google.com&enx1=Browser&evx1=Firefox&tx1=1000", url);
         }
@@ -95,7 +95,7 @@ namespace Threadtail.ServerLibrary.Test
 
             var urlBuilder = ObjectFactory.GetInstance<IUrlBuilder>();
 
-            var url = urlBuilder.BuildUrl();
+            var url = urlBuilder.BuildUrl(threadtailHttpContext);
 
             StringAssert.Contains("http://www.google.com&enx1=Browser&evx1=Firefox&tx1=1001", url);
         }

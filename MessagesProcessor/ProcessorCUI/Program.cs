@@ -4,6 +4,7 @@
 
 #region Using directives
 using System;
+using StructureMap;
 
 #endregion
 
@@ -13,7 +14,8 @@ namespace ProcessorCUI
     {
         private static void Main(string[] args)
         {
-            var notificationConsumer = new NotificationConsumer();
+            Bootstrapper.InitializeStructureMap();
+            var notificationConsumer = ObjectFactory.GetInstance<NotificationConsumer>();
             Console.WriteLine("Finished");
             notificationConsumer.Dispose();
         }

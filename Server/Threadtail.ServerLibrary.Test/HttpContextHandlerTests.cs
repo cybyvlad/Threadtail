@@ -1,10 +1,7 @@
 #region Using directives
-using System.Web;
 
 using Moq;
-
 using NUnit.Framework;
-
 using StructureMap;
 
 #endregion
@@ -17,18 +14,16 @@ namespace Threadtail.ServerLibrary.Test
         [Test]
         public void Process_WhenTheContextContainsARawUrl_TheUrlIsSentToTheQueue()
         {
-            const string url = "http://www.google.com";
-
-            var ctx = new HttpContext(new HttpRequest("", url, ""), new HttpResponse(null));
-
             var messageBusSenderMock = new Mock<IMessageBusSender>();
 
-            var context = new ThreadtailHttpContext(ctx);
+            const string url = "/x.jpg";
+            var contextMock = Mock.Of<IThreadtailHttpContext>(httpContext => httpContext.Url == url &&
+                                                                             httpContext.BrowserName == "Firefox");
 
             ObjectFactory.Initialize(delegate(IInitializationExpression e)
                                          {
                                              e.For<IUrlBuilder>().Use<UrlBuilder>();
-                                             e.For<IThreadtailHttpContext>().Use(context);
+                                             e.For<IThreadtailHttpContext>().Use(contextMock);
                                              e.For<IHttpContextHandler>().Use<HttpContextHandler>();
                                              e.For<IMessageBusSender>().Use(messageBusSenderMock.Object);
                                              e.For<IJavaScriptTimeCalculator>().Use<JavaScriptTimeCalculator>();
@@ -37,7 +32,7 @@ namespace Threadtail.ServerLibrary.Test
 
             handler.Process();
 
-            messageBusSenderMock.Verify(sender => sender.SendMessage(url));
+            messageBusSenderMock.Verify(sender => sender.SendMessage(("/x.jpg&enx1=Browser&evx1=Firefox&tx1=0")));
         }
     }
 }

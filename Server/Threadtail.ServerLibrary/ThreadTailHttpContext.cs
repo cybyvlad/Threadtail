@@ -19,20 +19,13 @@ namespace Threadtail.ServerLibrary
         {
             get
             {
-                var rawUrl = _context.Request.RawUrl;
-
-                if (!String.IsNullOrWhiteSpace(rawUrl))
-                {
-                    return rawUrl;
-                }
-
-                throw new ContextContainsNoUrlException();
+                return _context.Request.RawUrl;
             }
         }
 
         public string BrowserName
         {
-            get { throw new NotImplementedException(); }
+            get { return _context.Request.Browser.Browser; }
         }
     }
 }
