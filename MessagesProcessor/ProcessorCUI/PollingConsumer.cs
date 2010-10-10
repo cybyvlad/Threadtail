@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 
 using RabbitMQ.Client;
-
+using StructureMap;
 using Threadtail.RabbitMqUtils;
 
 #endregion
@@ -15,7 +15,7 @@ namespace ProcessorCUI
     {
         public PollingConsumer()
         {
-            _channelWrapper = ChannelFactory.CreateChannel();
+            _channelWrapper = ObjectFactory.GetInstance<IChannelWrapper>();
             _thread = new Thread(Start);
             _thread.Start(_channelWrapper.Channel);
         }

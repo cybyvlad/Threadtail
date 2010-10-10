@@ -1,7 +1,10 @@
 #region Using directives
 using System;
+using System.Activities.Expressions;
+using System.Collections.Generic;
 using System.Web;
-
+using StructureMap;
+using StructureMap.Pipeline;
 using Threadtail.ServerLibrary;
 
 #endregion
@@ -29,8 +32,11 @@ namespace Threadtail.Server.WebApp.App_Code
         {
             var threadTailHttpContext = new ThreadtailHttpContext(context);
 
-            var httpContextHandler = new HttpContextHandler(threadTailHttpContext, null, null);
-            httpContextHandler.Process();
+            var dictionary = new Dictionary<string, object>();
+            dictionary.Add("context",threadTailHttpContext);
+
+            var contextHandler = ObjectFactory.GetInstance<IHttpContextHandler>(new ExplicitArguments(dictionary));
+            contextHandler.Process();
         }
     }
 }

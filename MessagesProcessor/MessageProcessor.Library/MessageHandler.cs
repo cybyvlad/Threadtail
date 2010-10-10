@@ -7,7 +7,12 @@ namespace MessageProcessor.Library
 {
     public class MessageHandler : IMessageHandler
     {
-        private IRuleEngine _ruleEngine;
+        private readonly IRuleEngine _ruleEngine;
+
+        public MessageHandler(IRuleEngine ruleEngine)
+        {
+            _ruleEngine = ruleEngine;
+        }
 
         #region IMessageHandler Members
 
@@ -53,7 +58,11 @@ namespace MessageProcessor.Library
                 list.Add(analyticsEvent);
             }
 
-            _ruleEngine.ProcessAnalyticsEvents("TODO", sessionId, list);
+            Console.WriteLine(_i++);
+//            Console.WriteLine(sessionId);
+//            _ruleEngine.ProcessAnalyticsEvents("TODO", sessionId, list);
         }
+
+        private static int _i;
     }
 }

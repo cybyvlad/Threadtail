@@ -15,7 +15,9 @@ namespace ProcessorCUI
         private static void Main(string[] args)
         {
             Bootstrapper.InitializeStructureMap();
+
             var notificationConsumer = ObjectFactory.GetInstance<NotificationConsumer>();
+            
             Console.WriteLine("Finished");
             notificationConsumer.Dispose();
         }

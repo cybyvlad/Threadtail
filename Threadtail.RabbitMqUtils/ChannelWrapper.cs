@@ -13,10 +13,8 @@ namespace Threadtail.RabbitMqUtils
         public ChannelWrapper()
         {
             var factory = new ConnectionFactory();
-            var protocol = Protocols.FromEnvironment();
 
-            _connection = factory.CreateConnection(protocol, ThreadtailConfiguration.Instance.RabbitMqHost,
-                                                   ThreadtailConfiguration.Instance.RabbitMqPort);
+            _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
 
             // Declare Exchange
@@ -80,11 +78,11 @@ namespace Threadtail.RabbitMqUtils
                 {
                     if (_channel != null)
                     {
-                        _channel.Close();
+                        _channel.Dispose();
                     }
                     if (_connection != null)
                     {
-                        _connection.Close();
+                        _connection.Dispose();
                     }
                 }
 
@@ -100,6 +98,7 @@ namespace Threadtail.RabbitMqUtils
         public void Dispose()
         {
             Dispose(true);
+
             // This object will be cleaned up by the Dispose method.
             // Therefore, you should call GC.SupressFinalize to
             // take this object off the finalization queue
