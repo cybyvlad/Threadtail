@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using MessageProcessor.Library.Events;
 
 namespace MessageProcessor.Library
 {
@@ -15,9 +14,11 @@ namespace MessageProcessor.Library
             _allRules = ruleLoader.LoadRules();
         }
 
-        public void ProcessAnalyticsEvents(string siteId, string sessionId, SortedSet<AnalyticsEvent> analyticsEvents)
+        public void ProcessAnalyticsEvents(IRuleEngineInput ruleEngineInput)
         {
-            var rulesForSite = _ruleFilter.FilterRulesForSite(siteId);
+            var rulesForSite = _ruleFilter.FilterRulesForSite(ruleEngineInput.SiteId);
+
+            // Get context from Mongo
         }
     }
 }

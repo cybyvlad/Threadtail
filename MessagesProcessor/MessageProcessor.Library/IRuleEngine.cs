@@ -6,10 +6,6 @@ namespace MessageProcessor.Library
 {
     public interface IRuleEngine
     {
-        void ProcessAnalyticsEvents(string siteId, string sessionId, SortedSet<AnalyticsEvent> analyticsEvents);
-    }
-
-    public interface IRule
-    {
+        void ProcessAnalyticsEvents(IRuleEngineInput ruleEngineInput);
     }
 }

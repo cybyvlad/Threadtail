@@ -47,14 +47,22 @@
     <Compile Include="Events\PageEvent.cs" />
     <Compile Include="Events\VisitData.cs" />
     <Compile Include="Events\Visitor.cs" />
+    <Compile Include="IFastRule.cs" />
+    <Compile Include="ILongRunningRule.cs" />
     <Compile Include="IMessageHandler.cs" />
+    <Compile Include="IRule.cs" />
+    <Compile Include="IRuleContext.cs" />
     <Compile Include="IRuleEngine.cs" />
+    <Compile Include="IRuleEngineInput.cs" />
     <Compile Include="IRuleFilter.cs" />
     <Compile Include="IRuleLoader.cs" />
     <Compile Include="MessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleEngine.cs" />
+    <Compile Include="RuleEngineInput.cs" />
     <Compile Include="RuleLoader.cs" />
+    <Compile Include="Rules\IRuleInput.cs" />
+    <Compile Include="Rules\SetBrowserInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -60,7 +60,8 @@ namespace MessageProcessor.Library
 
             Console.WriteLine(_i++);
 //            Console.WriteLine(sessionId);
-//            _ruleEngine.ProcessAnalyticsEvents("TODO", sessionId, list);
+            var ruleEngineInput = new RuleEngineInput("TODO", sessionId, list);
+            _ruleEngine.ProcessAnalyticsEvents(ruleEngineInput);
         }
 
         private static int _i;

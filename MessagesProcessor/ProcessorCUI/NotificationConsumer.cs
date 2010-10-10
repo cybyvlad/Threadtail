@@ -95,6 +95,7 @@ namespace ProcessorCUI
 
                     _messageHandler.Process(message);
                     
+
                     // TODO: stop?
                 }
                 catch (OperationInterruptedException ex)
