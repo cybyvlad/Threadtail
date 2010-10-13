@@ -16,7 +16,7 @@ namespace MessageProcessor.Library
 
         public void ProcessAnalyticsEvents(IRuleEngineInput ruleEngineInput)
         {
-            var rulesForSite = _ruleFilter.FilterRulesForSite(ruleEngineInput.SiteId);
+            //var rulesForSite = _ruleFilter.FilterRulesForSite(ruleEngineInput.SiteId);
 
             // Get context from Mongo
         }

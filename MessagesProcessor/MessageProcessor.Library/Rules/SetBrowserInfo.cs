@@ -4,7 +4,7 @@
     {
         public void Execute(IRuleInput ruleInput, IRuleContext context)
         {
-
+            context.BrowserInfo = ruleInput.BrowserInfo;
         }
     }
 }
